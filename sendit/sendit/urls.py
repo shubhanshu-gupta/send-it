@@ -11,5 +11,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('senditapp.urls')),
+    url(r'^senditapp/', include('senditapp.urls')),
 )
