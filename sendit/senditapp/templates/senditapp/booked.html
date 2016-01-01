@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sendit Consignment Booking Confirmation</title>
+ 
+
+	<link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">  
+
+  	 <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/starter-template/starter-template.css" rel="stylesheet">
+
+    <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+
+   </head>
+
+  <body>
+
+<!-- <p> <h3>congratulations!! you have successfully booked the ride. We'll contact you shortly </h3></p>
+ -->
+
+  {% for d in finaldata %}
+
+  <p> Thank you. We will call you on {{ d.mobile_no }} to pick your parcel from {{ d.pick_location }} and drop at {{ d.drop_location }}. </p>
+  {% endfor %}
+</body>
+</html>
