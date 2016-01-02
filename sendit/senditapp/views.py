@@ -43,11 +43,11 @@ def show(request):
 	
 	cord_pick = data['features'][0]['geometry']['coordinates']
 	
-	for address in addresses_d:
-		resp = requests.get(url=url+address)
-		data = json.loads(resp.text)
+	for address1 in addresses_d:
+		resp1 = requests.get(url=url+address1)
+		data1 = json.loads(resp1.text)
 	
-	cord_drop = data['features'][0]['geometry']['coordinates']
+	cord_drop = data1['features'][0]['geometry']['coordinates']
 
 	# convert decimal degrees to radians 
 	lon1, lat1, lon2, lat2 = map(radians, [cord_pick[0], cord_drop[0], cord_pick[1], cord_drop[1]])
