@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_exempt
 from senditapp.models import *
+import requests, json
+
 
 import jinja2
 from jinja2.ext import loopcontrols
@@ -26,12 +28,28 @@ def show(request):
 	rider.time = request.POST['time']
 	rider.mobile = request.POST['mobile_no']
 	rider.save()
+	
+	#gmaps = GoogleMaps(AIzaSyCSYYYxo6vopZp8hOzpEMywRutTsMDoGIc)
+	#lat, lng = gmaps.address_to_latlng(rider.pick)
+	url = 'http://photon.komoot.de/api/?q='
+	addresses = [rider.pick]
+	
+	for address in addresses:
+		resp = requests.get(url=url+address)
+		data = json.loads(resp.text)
+	
+	cord = data['features'][0]['geometry']['coordinates']
+
 	ridedata={}
 	ridedata['pick_location']=rider.pick
 	ridedata['drop_location']=rider.drop
 	ridedata['vehicle_type']=rider.vehicle
 	ridedata['time']=rider.time
 	ridedata['mobile_no']=rider.mobile
+	
+	ridedata['lat'] = cord[0]
+	ridedata['lng'] = cord[1]
+	
 	finaldata.append(ridedata)
 	template = loader.get_template('senditapp/booked.html')
 	Context = RequestContext(request, {'finaldata':finaldata})

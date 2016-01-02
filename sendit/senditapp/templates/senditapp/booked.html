@@ -29,7 +29,12 @@
 
   {% for d in finaldata %}
 
-  <p> Thank you. We will call you on {{ d.mobile_no }} to pick your parcel from {{ d.pick_location }} and drop at {{ d.drop_location }}. </p>
+  <p> {{ d.lat }} & {{ d.lng }} Thank you. We will call you on {{ d.mobile_no }} to pick your parcel from {{ d.pick_location }} and drop at {{ d.drop_location }}. </p>
+  
+	<!--{% for cord in d.data %}
+		<p> co-ordinates are {cord}
+	{% endfor %}-->
+  
   {% endfor %}
 </body>
 </html>
