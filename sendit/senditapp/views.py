@@ -32,13 +32,20 @@ def show(request):
 	#gmaps = GoogleMaps(AIzaSyCSYYYxo6vopZp8hOzpEMywRutTsMDoGIc)
 	#lat, lng = gmaps.address_to_latlng(rider.pick)
 	url = 'http://photon.komoot.de/api/?q='
-	addresses = [rider.pick]
+	addresses_p = [rider.pick]
+	addresses_d = [rider.drop]
 	
-	for address in addresses:
+	for address in addresses_p:
 		resp = requests.get(url=url+address)
 		data = json.loads(resp.text)
 	
-	cord = data['features'][0]['geometry']['coordinates']
+	cord_pick = data['features'][0]['geometry']['coordinates']
+	
+	for address in addresses_d:
+		resp = requests.get(url=url+address)
+		data = json.loads(resp.text)
+	
+	cord_drop = data['features'][0]['geometry']['coordinates']
 
 	ridedata={}
 	ridedata['pick_location']=rider.pick
@@ -47,8 +54,10 @@ def show(request):
 	ridedata['time']=rider.time
 	ridedata['mobile_no']=rider.mobile
 	
-	ridedata['lat'] = cord[0]
-	ridedata['lng'] = cord[1]
+	ridedata['pick_lat'] = cord_pick[0]
+	ridedata['pick_lng'] = cord_pick[1]
+	ridedata['drop_lat'] = cord_drop[0]
+	ridedata['drop_lng'] = cord_drop[1]
 	
 	finaldata.append(ridedata)
 	template = loader.get_template('senditapp/booked.html')
