@@ -85,6 +85,51 @@
     		</div>
     	</div>
     </div>
+	
+   <script>
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+var autocomplete,autocomplete_d;
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('pick_location')),
+      {types: ['geocode']});
+  autocomplete_d = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('drop_location')),
+      {types: ['geocode']});
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+  autocomplete_d.addListener('place_changed', fillInAddress);
+}
+
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+	  autocomplete_d.setBounds(circle.getBounds());
+    });
+  }
+}
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSYYYxo6vopZp8hOzpEMywRutTsMDoGIc&signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
+	
 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

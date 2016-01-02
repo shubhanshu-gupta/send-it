@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'senditapp'
-    #'location_field'
-    'geoposition'
 ]
 
 GEOPOSITION_MAP_OPTIONS = {
