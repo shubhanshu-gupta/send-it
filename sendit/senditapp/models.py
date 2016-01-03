@@ -2,13 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django import forms
-from django.contrib.gis.db import models
 
 
-
-
-#time_widget = forms.widgets.TimeInput(attrs={'class': 'time-pick'})
-#valid_time_formats = ['%H:%M', '%I:%M%p', '%I:%M %p']
 
 class Ride(models.Model):
 	#pickup
@@ -20,6 +15,7 @@ class Ride(models.Model):
 	#type of vehicle, time, mobile
     vehicle = models.CharField(max_length=300)
 	#time
+	#valid_time_formats = ['%H:%M', '%I:%M%p', '%I:%M %p']
     time = models.TimeField()
     #widget=time_widget, help_text='ex: 10:30AM', input_formats=valid_time_formats
     #mobile
